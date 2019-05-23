@@ -8,11 +8,8 @@ $objUsuario = new Usuario();
 
 if (isset($_POST['login'])) {
     if ($objUsuario->login($_POST) == true) {
-echo   'LOGADOOOOOOOOOO';
-//        header('location: /' . ROOT . '/home.php');
+        header('location: /' . ROOT . '/home.php');
     } else {
-        echo   'PORRA MEU ERROU A SENHA';
-
         echo '<script type="text/javascript">alert("Erro ao tentar logar");</script>';
     }
 }

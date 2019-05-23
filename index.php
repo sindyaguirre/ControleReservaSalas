@@ -1,4 +1,5 @@
 <?php
-header('location: /gerenciadorTarefas/home');
+
+header('location: /ControleReservaSalas/login');
 
 ?>

@@ -1,6 +1,18 @@
 <?php
 
-define("TITLO", 'Gerenciador de reserva de salas');
+/* Define o limite de tempo da sessão em 60 minutos */
+session_cache_expire(60);
+
+// Inicia a sessão
+session_start();
+
+// Variável que verifica se o usuário está logado
+if (!isset($_SESSION['logado'])) {
+    $_SESSION['logado'] = false;
+}
+
+// Erro do login
+$_SESSION['login_erro'] = false;
 
 class Conexao {
 

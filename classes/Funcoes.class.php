@@ -4,18 +4,55 @@ class Funcoes {
 
     /**
      * 
+     * @param type $senha
+     * @return type
+     */
+    public function encript_senha($senha) {
+        return md5($senha);
+    }
+
+    /**
+     * 
      * @param type $param 1 retorna string, 2 retorna array
      * @param type $id se o primeiro parametro receber 1, este é obrigatório
      * @return int
      */
-    public function returnTempoEstimado($param, $id = "") {
+    public function turno($param, $id = "") {
 
         $arrayDados = array(
             "Selecione...",
-            "2 horas",
-            "4 horas",
-            "6 horas",
-            "8 horas"
+            "Manhã",
+            "Tarde",
+            "Noite"
+        );
+        switch ($param) {
+            case '1':
+                return $arrayDados[$id];
+                break;
+
+            case '2':
+                return $arrayDados;
+                break;
+
+            default:
+                return 0;
+                break;
+        }
+    }
+    /**
+     * 
+     * @param type $param 1 retorna string, 2 retorna array
+     * @param type $id se o primeiro parametro receber 1, este é obrigatório
+     * @return int
+     */
+    public function tipoUsuario($param, $id = "") {
+
+        $arrayDados = array(
+            "Selecione...",
+            "Admin",
+            "Professor",
+            "Aluno",
+            "Comum"
         );
         switch ($param) {
             case '1':
@@ -63,7 +100,6 @@ class Funcoes {
                 break;
         }
     }
-
 
     public function tratarCaracter($vlr, $tipo) {
         switch ($tipo) {
