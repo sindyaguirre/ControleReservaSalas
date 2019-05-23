@@ -1,0 +1,12 @@
+usuario
+	Cadastro 
+	Edição
+	Visualização
+sala
+	Cadastro 
+	Edição
+	Visualização
+reserva
+	Cadastro 
+	Edição
+	Visualização

@@ -3,9 +3,6 @@
 include_once 'Conexao.class.php';
 include_once 'Funcoes.class.php';
 
-define("TITLO", 'Gerenciador de reserva de salas');
-define("ROOT", 'ControleReservaSalas');
-
 class Usuario {
 
     private $con;
@@ -51,7 +48,7 @@ class Usuario {
      */
     public function querySeleciona($dado) {
         try {
-            $this->idusuario = $this->objFuncoes->base64($dado, 2);
+            $this->idusuario = $dado;
             $select = $this->con->conectar()->prepare("SELECT * FROM `usuario` WHERE `idusuario = :idusu;");
             $select->bindParam(":idusu", $this->idusuario, PDO::PARAM_INT);
             $select->execute();
@@ -112,7 +109,7 @@ class Usuario {
 
     public function queryUpdate($dados) {
         try {
-            $this->idusuario = $this->objFuncoes->base64($dados['usuario'], 2);
+            $this->idusuario = $dados['idusuario'];
             $this->nome = $this->objFuncoes->tratarCaracter($dados['nome'], 1);
             $this->endereco = $this->objFuncoes->tratarCaracter($dados['endereco'], 1);
             $this->email = $dados['email'];
@@ -174,10 +171,13 @@ class Usuario {
                 $_SESSION['logado'] = false;
                 // Preenche o erro para o usuário
                 $_SESSION['login_erro'] = 'Usuário ou senha inválidos';
-            }
+                }
+            return $_SESSION['logado'];
         } catch (Exception $ex) {
+            
             $_SESSION['logado'] = false;
             $_SESSION['login_erro'] = $ex->getMessage();
+            
             return "error " . $ex->getMessage();
         }
     }

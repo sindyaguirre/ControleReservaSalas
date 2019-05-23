@@ -5,6 +5,12 @@ require_once 'classes/Usuario.class.php';
 $objFuncoes = new Funcoes();
 $objUsuario = new Usuario();
 
+$objFuncoes->isLogado();
+
+if (!isset($_SESSION['logado'])) {
+    header('location: /' . ROOT . '/home.php');
+}
+
 if (isset($_POST['btCadastrar'])) {
     if ($objUsuario->queryInsert($_POST) == 'ok') {
 
@@ -25,7 +31,7 @@ if (isset($_POST['btAlterar'])) {
 
 if (isset($_GET['acao'])) {
     switch ($_GET['acao']) {
-        case 'edit': $func = $objUsuario->querySeleciona($_GET['func']);
+        case 'edit': $sala = $objUsuario->querySeleciona($_GET['func']);
             break;
         case 'delet':
             if ($objUsuario->queryDelete($_GET['func']) == 'ok') {
@@ -77,8 +83,8 @@ if (isset($_GET['acao'])) {
                     </button>
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <li><a href="projeto.php">Projetos</a></li>
-                            <li><a href="tarefa.php">Tarefas</a></li>
+<!--                            <li><a href="reserva.php">Reservar</a></li>
+                            <li><a href="sala.php">Salas</a></li>-->
                             <li><a href="usuario.php">Pessoas</a></li>
                         </ul>
 
@@ -93,16 +99,16 @@ if (isset($_GET['acao'])) {
         <div id="formulario">
             <form name="formCad" action="" method="post">
                 <label>Nome: </label><br>
-                <input type="text" id="nome" name="nome" required="required" value="<?= $objFuncoes->tratarCaracter((isset($func['nome'])) ? ($func['nome']) : (''), 2) ?>"><br>
+                <input type="text" id="nome" name="nome" required="required" value="<?= $objFuncoes->tratarCaracter((isset($sala['nome'])) ? ($sala['nome']) : (''), 2) ?>"><br>
 
                 <label>RG: </label><br>
-                <input type="text" id="rg" name="rg" required="required" value="<?= isset($func['rg']) ? ($func['rg']) : ('') ?>"><br>
+                <input type="text" id="rg" name="rg" required="required" value="<?= isset($sala['rg']) ? ($sala['rg']) : ('') ?>"><br>
 
                 <label>CPF: </label><br>
-                <input type="text" name="cpf" id="cpf" required="required" value="<?= isset($func['cpf']) ? ($func['cpf']) : ('') ?>"><br>
+                <input type="text" name="cpf" id="cpf" required="required" value="<?= isset($sala['cpf']) ? ($sala['cpf']) : ('') ?>"><br>
 
                 <label>E-mail: </label><br>
-                <input type="mail" name="email" id="email" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="<?= $objFuncoes->tratarCaracter((isset($func['email'])) ? ($func['email']) : (''), 2) ?>"><br>
+                <input type="mail" name="email" id="email" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="<?= $objFuncoes->tratarCaracter((isset($sala['email'])) ? ($sala['email']) : (''), 2) ?>"><br>
 
                 <label>Tipo de usuário: </label><br>
                 <select name="tipoUsuario" id="tipoUsuario">
@@ -112,7 +118,7 @@ if (isset($_GET['acao'])) {
                 </select>
 
                 <label>Endereço: </label><br>
-                <input type="text" name="endereco" required="required" value="<?= $objFuncoes->tratarCaracter((isset($func['endereco'])) ? ($func['endereco']) : (''), 2) ?>"><br>
+                <input type="text" name="endereco" required="required" value="<?= $objFuncoes->tratarCaracter((isset($sala['endereco'])) ? ($sala['endereco']) : (''), 2) ?>"><br>
 
                 <?php if (isset($_GET['acao']) <> 'edit') { ?>
                     <label>Senha: </label><br>
@@ -123,7 +129,7 @@ if (isset($_GET['acao'])) {
 
                 <!--CRIAR BOTÃO PARA LIMPAR FORMULARIO, E VOLTAR A TELA INICIAL-->
 
-                <input type="hidden" name="func" value="<?= (isset($func['idUsuario'])) ? ($objFuncoes->base64($func['idUsuario'], 1)) : ('') ?>">
+                <input type="hidden" name="func" value="<?= (isset($sala['idUsuario'])) ? ($objFuncoes->base64($sala['idUsuario'], 1)) : ('') ?>">
             </form>
         </div>
         <div>

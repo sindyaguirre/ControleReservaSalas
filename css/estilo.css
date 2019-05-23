@@ -1,6 +1,21 @@
-body{
-    margin-left: 5%!important;
+body,#formulario{
+    margin-left: 5%;
 }
+div#login{
+    text-align: center;
+    margin-left: 0%!important;
+}
+
+div.container{
+    margin-bottom: 3%;
+}
+
+form#formLogin{
+    background: #f0f0f0;
+    padding: 1px 1px 1px 1px;
+    margin-top: 3%;
+}
+
 h1{
     margin-top: 5%!important;
 }

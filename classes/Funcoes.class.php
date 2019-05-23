@@ -1,4 +1,7 @@
 <?php
+define("TITLO", 'Gerenciador de reserva de salas');
+define("ROOT", 'ControleReservaSalas');
+
 
 class Funcoes {
 
@@ -39,6 +42,7 @@ class Funcoes {
                 break;
         }
     }
+
     /**
      * 
      * @param type $param 1 retorna string, 2 retorna array
@@ -133,6 +137,26 @@ class Funcoes {
                 break;
         }
         return $rst;
+    }
+
+    /**
+     * Funcao responsavel por verificar se esta logado, caso contrario retorna para a pagina de login
+     * @return type
+     */
+    public function isLogado() {
+
+        if (!isset($_SESSION['logado']) || $_SESSION['logado'] == false) {
+            header('location: /ControleReservaSalas/login');
+        }
+        return ($_SESSION['logado']);
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function isAdmin() {
+        return ($_SESSION['tipoUsuario'] == 1 ? TRUE : FALSE);
     }
 
 }

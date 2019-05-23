@@ -5,15 +5,16 @@ require_once 'classes/Usuario.class.php';
 $objFuncoes = new Funcoes();
 $objUsuario = new Usuario();
 
+$objFuncoes->isLogado();
+
 if (isset($_POST['btCadastrar'])) {
     if ($objUsuario->queryInsert($_POST) == true) {
 
-        header('location: /'.ROOT.'/home.php');
+        header('location: /' . ROOT . '/home.php');
     } else {
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
     }
 }
-
 ?>
 <!DOCTYPE HTML>
 <html lang="pt-br">
@@ -76,13 +77,15 @@ if (isset($_POST['btCadastrar'])) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
                     <div class="nav-collapse">
                         <ul class="nav">
                             <li><a href="sala.php">Salas</a></li>
                             <li><a href="reserva.php">Reservar Sala</a></li>
+                        <?php echo $objFuncoes->isAdmin() ? '<li><a href="usuario.php">Usuarios</a></li>' : "" ?>
                             
-                            <li><a href="usuario.php">Usuario</a></li>
+                            <li><a href="logout.php">Logout</a></li>
                         </ul>
 
                     </div>
@@ -109,22 +112,33 @@ if (isset($_POST['btCadastrar'])) {
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($objUsuario->querySelect() as $rst) {
-                        ?>
-                        <tr>
-                            <td scope='row' ><?php echo isset($rst['tarefa']) ? $objFuncoes->tratarCaracter($rst['tarefa'], 2) : ""; ?></td>
-                            <td><?php echo isset($rst['projeto']) ? $objFuncoes->tratarCaracter($rst['projeto'], 2) : ""; ?></td>
-                            <td><?php echo isset($rst['idTempoEstimado']) ? $objFuncoes->returnTempoEstimado(1, $rst['idTempoEstimado']) : ""; ?></td>
-                            <td><?php echo isset($rst['idNivel']) ? $objFuncoes->returnNivel(1, $rst['idNivel']) : ""; ?></td>
-                            <td><?php echo isset($rst['idStatus']) ? $objFuncoes->returnStatus(1, $rst['idStatus']) : ""; ?></td>
-                            <td>
-                                <div class="">
-                                    <a class="editar" href="?acao=edit&tarf=<?= $objFuncoes->base64($rst['idTarefa'], 1) ?>" title="Editar dados"><img src="img/ico-editar.png" width="16" height="16" alt="Editar"></a>
-                                    <a class="excluir" href="?acao=delet&tarf=<?= $objFuncoes->base64($rst['idTarefa'], 1) ?>" title="Excluir esse dado"><img src="img/ico-excluir.png" width="16" height="16" alt="Excluir"></a>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php }
+                    /*
+                      aqui ainda falta fazer a query de ligação entre as tabelas
+
+                      sala
+                      horario
+                      usuario
+
+                     */
+
+                    if (isset($_SESSION['logado']) && $_SESSION['logado'] == true) {
+                        foreach ($objUsuario->querySelect() as $rst) {
+                            ?>
+                            <tr>
+                                <td scope='row' ><?php echo isset($rst['sala']) ? $objFuncoes->tratarCaracter($rst['sala'], 2) : "-"; ?></td>
+                                <td><?php echo isset($rst['horario']) ? $objFuncoes->tratarCaracter($rst['horario'], 2) : "-"; ?></td>
+                                <td><?php echo isset($rst['nome']) ? $objFuncoes->tratarCaracter($rst['nome'], 2) : "-"; ?></td>
+                                <td><?php echo isset($rst['status']) ? $objFuncoes->returnStatus(1, $rst['status']) : "-"; ?></td>
+                                <td>
+                                    <div class="">
+                                        <a class="editar" href="?acao=edit&tarf=<?= isset($rst['idreserva']) ? $objFuncoes->base64($rst['idreserva'], 1) : "" ?>" title="Editar dados"><img src="img/ico-editar.png" width="16" height="16" alt="Editar"></a>
+                                        <a class="excluir" href="?acao=delet&tarf=<?= isset($rst['idreserva']) ? $objFuncoes->base64($rst['idreserva'], 1) : "" ?>" title="Excluir esse dado"><img src="img/ico-excluir.png" width="16" height="16" alt="Excluir"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
                     ?>
                 </tbody>
             </table>
