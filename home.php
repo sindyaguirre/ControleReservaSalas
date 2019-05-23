@@ -1,9 +1,11 @@
 <?php
 require_once 'classes/Funcoes.class.php';
 require_once 'classes/Usuario.class.php';
+require_once 'classes/Sala.class.php';
 
 $objFuncoes = new Funcoes();
 $objUsuario = new Usuario();
+$objSala = new Sala();
 
 $objFuncoes->isLogado();
 
@@ -83,8 +85,8 @@ if (isset($_POST['btCadastrar'])) {
                         <ul class="nav">
                             <li><a href="sala.php">Salas</a></li>
                             <li><a href="reserva.php">Reservar Sala</a></li>
-                        <?php echo $objFuncoes->isAdmin() ? '<li><a href="usuario.php">Usuarios</a></li>' : "" ?>
-                            
+                            <?php echo $objFuncoes->isAdmin() ? '<li><a href="usuario.php">Usuarios</a></li>' : "" ?>
+
                             <li><a href="logout.php">Logout</a></li>
                         </ul>
 
@@ -98,6 +100,41 @@ if (isset($_POST['btCadastrar'])) {
             <button type="button" class="btn btn-primary" name="reservar" id="reservar">Reservar Sala</button>
             <button type="button" class="btn btn-info" name="fecharCadastro" id="fecharCadastro">Fechar Formulário</button>
         </p>
+        <div id="formulario">
+            <form name="formCad" action="" method="post">
+                <label>Nome: </label><br>
+
+                <input type="text" id="nome" name="nome" required="required" value="<?= $_SESSION['nomeUsuario'] ?>"><br>
+
+                <label>Turno: </label><br>
+                <select name="idturno" id="idturno">
+                    <?php foreach ($objSala->querySelectTurno() as $key => $value) {
+                        ?>
+                        <option value="<?= $value['idturno'] ?>"><?= $objFuncoes->tratarCaracter($value['turno'], 2) ?></option>
+                    <?php } ?>
+                </select>
+
+
+                <label>Horário: </label><br>
+                <select name="idhorario" id="idhorario" disabled="disabled">
+                    <?php foreach ($objSala->querySelectHorario() as $key => $value) {
+                        ?>
+                        <option value="<?= $value['idhorario'] ?>"><?= $objFuncoes->tratarCaracter($value['horario'], 2) ?></option>
+                    <?php } ?>
+                </select>
+
+                <?php if (isset($_GET['acao']) <> 'edit') { ?>
+                    <label>Senha: </label><br>
+                    <input type="password" name="senha" required="required"><br>
+                <?php } ?>
+                <br>
+                <input type="submit" name="<?= (isset($_GET['acao']) == 'edit') ? ('btAlterar') : ('btCadastrar') ?>" value="<?= (isset($_GET['acao']) == 'edit') ? ('Alterar') : ('Cadastrar') ?>">
+
+                <!--CRIAR BOTÃO PARA LIMPAR FORMULARIO, E VOLTAR A TELA INICIAL-->
+
+                <input type="hidden" name="func" value="<?= (isset($sala['idUsuario'])) ? ($objFuncoes->base64($sala['idUsuario'], 1)) : ('') ?>">
+            </form>
+        </div>
 
         <div class="">
             <table id="tabelaReservas" class="table tablesorter table-striped tabelaReservas">
@@ -112,15 +149,6 @@ if (isset($_POST['btCadastrar'])) {
                 </thead>
                 <tbody>
                     <?php
-                    /*
-                      aqui ainda falta fazer a query de ligação entre as tabelas
-
-                      sala
-                      horario
-                      usuario
-
-                     */
-
                     if (isset($_SESSION['logado']) && $_SESSION['logado'] == true) {
                         foreach ($objUsuario->querySelect() as $rst) {
                             ?>

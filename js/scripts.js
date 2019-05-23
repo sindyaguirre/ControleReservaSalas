@@ -31,6 +31,20 @@ $(function () {
     $("#abrirCadastro").click(function () {
 //        $("#cadastro").diplay(true);
 //        $("#cadastro").css("display", "none");
-        
+
     });
+    /*
+     * ao clicar no campo de turno deve abrir 
+     * a lista de horarios correspondentes ao turno selecionado
+     */
+    $("#idturno").click(function () {
+        alert(1);
+        $("#idhorario").css("disabled", "false");
+    });
+//            buscarHorarioPorTurno($("#idturno").val());
+
+    //botao de fechar formulário e abrir formulario
+
+
 });
+

@@ -83,8 +83,8 @@ if (isset($_GET['acao'])) {
                     </button>
                     <div class="nav-collapse">
                         <ul class="nav">
-<!--                            <li><a href="reserva.php">Reservar</a></li>
-                            <li><a href="sala.php">Salas</a></li>-->
+                            <li><a href="home.php">Home</a></li>
+                            <li><a href="sala.php">Salas</a></li>
                             <li><a href="usuario.php">Pessoas</a></li>
                         </ul>
 

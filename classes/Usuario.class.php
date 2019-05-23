@@ -181,5 +181,5 @@ class Usuario {
             return "error " . $ex->getMessage();
         }
     }
-
+    
 }

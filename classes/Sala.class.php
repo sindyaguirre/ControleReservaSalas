@@ -76,7 +76,7 @@ class Sala {
      */
     public function queryInsert($dados) {
         try {
-            
+
             $this->sala = $this->objFuncoes->tratarCaracter($dados['sala'], 1);
             $this->qtdMaxAlunos = $dados['qtdMaxAlunos'];
 
@@ -140,9 +140,39 @@ class Sala {
      * 
      * @return type
      */
-    public function queryListarSalasHorarios() {
+    public function queryListarHorariosTurnos() {
         try {
-            $select = $this->con->conectar()->prepare("SELECT * FROM `salas`;");
+            $select = $this->con->conectar()->prepare("SELECT * FROM `horarios` as h 
+                INNER JOIN turno as t on h.idturno = t.idturno
+                order by t.idturno, h.idhorario;");
+            $select->execute();
+            return $select->fetchAll();
+        } catch (Exception $ex) {
+            return 'erro ' . $ex->getMessage();
+        }
+    }
+
+        /**
+     * 
+     * @return type
+     */
+    public function querySelectTurno() {
+        try {
+            $select = $this->con->conectar()->prepare("SELECT * FROM `turno`;");
+            $select->execute();
+            return $select->fetchAll();
+        } catch (Exception $ex) {
+            return 'erro ' . $ex->getMessage();
+        }
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function querySelectHorario() {
+        try {
+            $select = $this->con->conectar()->prepare("SELECT * FROM `horarios`;");
             $select->execute();
             return $select->fetchAll();
         } catch (Exception $ex) {
