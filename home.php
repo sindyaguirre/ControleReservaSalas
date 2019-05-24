@@ -96,7 +96,7 @@ if (isset($_POST['btCadastrar'])) {
             </div>
         </nav>
         <div><h1 class=""><small><?php echo TITLO; ?></small></h1></div>
-        <p>
+        <p style="display: none">
             <button type="button" class="btn btn-primary" name="reservar" id="reservar">Reservar Sala</button>
             <button type="button" class="btn btn-info" name="fecharCadastro" id="fecharCadastro">Fechar Formulário</button>
         </p>
@@ -123,10 +123,6 @@ if (isset($_POST['btCadastrar'])) {
                     <?php } ?>
                 </select>
 
-                <?php if (isset($_GET['acao']) <> 'edit') { ?>
-                    <label>Senha: </label><br>
-                    <input type="password" name="senha" required="required"><br>
-                <?php } ?>
                 <br>
                 <input type="submit" name="<?= (isset($_GET['acao']) == 'edit') ? ('btAlterar') : ('btCadastrar') ?>" value="<?= (isset($_GET['acao']) == 'edit') ? ('Alterar') : ('Cadastrar') ?>">
 
@@ -149,22 +145,29 @@ if (isset($_POST['btCadastrar'])) {
                 </thead>
                 <tbody>
                     <?php
-                    if (isset($_SESSION['logado']) && $_SESSION['logado'] == true) {
-                        foreach ($objUsuario->querySelect() as $rst) {
-                            ?>
-                            <tr>
-                                <td scope='row' ><?php echo isset($rst['sala']) ? $objFuncoes->tratarCaracter($rst['sala'], 2) : "-"; ?></td>
-                                <td><?php echo isset($rst['horario']) ? $objFuncoes->tratarCaracter($rst['horario'], 2) : "-"; ?></td>
-                                <td><?php echo isset($rst['nome']) ? $objFuncoes->tratarCaracter($rst['nome'], 2) : "-"; ?></td>
-                                <td><?php echo isset($rst['status']) ? $objFuncoes->returnStatus(1, $rst['status']) : "-"; ?></td>
-                                <td>
-                                    <div class="">
-                                        <a class="editar" href="?acao=edit&tarf=<?= isset($rst['idreserva']) ? $objFuncoes->base64($rst['idreserva'], 1) : "" ?>" title="Editar dados"><img src="img/ico-editar.png" width="16" height="16" alt="Editar"></a>
-                                        <a class="excluir" href="?acao=delet&tarf=<?= isset($rst['idreserva']) ? $objFuncoes->base64($rst['idreserva'], 1) : "" ?>" title="Excluir esse dado"><img src="img/ico-excluir.png" width="16" height="16" alt="Excluir"></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php
+                    $iscontrui = true;
+                    if ($iscontrui) {
+                        ?>
+                        <tr><td colspan='5' style="text-align: center;">Em construção!</td></tr>
+                        <?php
+                    } else {
+                        if (isset($_SESSION['logado']) && $_SESSION['logado'] == true) {
+                            foreach ($objSala->queryListarHorariosTurnos() as $rst) {
+                                ?>
+                                <tr>
+                                    <td scope='row' ><?php echo isset($rst['sala']) ? $objFuncoes->tratarCaracter($rst['sala'], 2) : "-"; ?></td>
+                                    <td><?php echo isset($rst['horario']) ? $objFuncoes->tratarCaracter($rst['horario'], 2) : "-"; ?></td>
+                                    <td><?php echo isset($rst['nome']) ? $objFuncoes->tratarCaracter($rst['nome'], 2) : "-"; ?></td>
+                                    <td><?php echo isset($rst['status']) ? $objFuncoes->returnStatus(1, $rst['status']) : "-"; ?></td>
+                                    <td>
+                                        <div class="">
+                                            <a class="editar" href="?acao=edit&tarf=<?= isset($rst['idreserva']) ? $objFuncoes->base64($rst['idreserva'], 1) : "" ?>" title="Editar dados"><img src="img/ico-editar.png" width="16" height="16" alt="Editar"></a>
+                                            <a class="excluir" href="?acao=delet&tarf=<?= isset($rst['idreserva']) ? $objFuncoes->base64($rst['idreserva'], 1) : "" ?>" title="Excluir esse dado"><img src="img/ico-excluir.png" width="16" height="16" alt="Excluir"></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
                         }
                     }
                     ?>
