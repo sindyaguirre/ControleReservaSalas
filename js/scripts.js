@@ -37,11 +37,14 @@ $(function () {
      * ao clicar no campo de turno deve abrir 
      * a lista de horarios correspondentes ao turno selecionado
      */
-    $("#idturno").click(function () {
-        alert(1);
-        $("#idhorario").css("disabled", "false");
+    $("#idturno").change(function () {
+        if ($(this).val() > 1) {
+            $("#idhorario").attr("disabled", false);
+            /**
+             * chamar um ajax para listar horarios somente do respectivo turno
+             */
+        }
     });
-//            buscarHorarioPorTurno($("#idturno").val());
 
     //botao de fechar formulário e abrir formulario
 
