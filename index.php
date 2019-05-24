@@ -1,5 +1,5 @@
 <?php
 
-header('location: /ControleReservaSalas/login');
+header('location: /ControleReservaSalas/login.php');
 
 ?>

@@ -146,7 +146,7 @@ class Funcoes {
     public function isLogado() {
 
         if (!isset($_SESSION['logado']) || $_SESSION['logado'] == false) {
-            header('location: /ControleReservaSalas/login');
+            header('location: /ControleReservaSalas/login.php');
         }
         return ($_SESSION['logado']);
     }
