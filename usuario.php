@@ -86,6 +86,7 @@ if (isset($_GET['acao'])) {
                             <li><a href="home.php">Home</a></li>
                             <li><a href="sala.php">Salas</a></li>
                             <li><a href="usuario.php">Pessoas</a></li>
+                            <li><a href="logout.php">Logout</a></li>
                         </ul>
 
                     </div>
