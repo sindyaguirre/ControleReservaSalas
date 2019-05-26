@@ -167,6 +167,7 @@ class Usuario {
                 $_SESSION['logado'] = true;
                 $_SESSION['nomeUsuario'] = $usuario['nome'];
                 $_SESSION['tipoUsuario'] = $usuario['tipoUsuario'];
+                $_SESSION['idusuario'] = $usuario['idusuario'];
             } else {
                 $_SESSION['logado'] = false;
                 // Preenche o erro para o usuário
