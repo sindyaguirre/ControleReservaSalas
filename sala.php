@@ -91,7 +91,8 @@ if (isset($_GET['acao'])) {
                         <ul class="nav">
                             <li><a href="reserva.php">Reservar</a></li>
                             <li><a href="sala.php">Salas</a></li>
-                            <li><a href="usuario.php">Pessoas</a></li>
+                            <?php echo $objFuncoes->isAdmin() ? '<li><a href="usuario.php">Usuarios</a></li>' : "" ?>
+
                             <li><a href="logout.php">Logout</a></li>
                         </ul>
 
