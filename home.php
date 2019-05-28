@@ -77,21 +77,15 @@ if (isset($_POST['btCadastrar'])) {
                     <!--.btn-navbar estaclasse é usada como alteranador para o contepudo colapsave-->
                     <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
                     </button>
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <li><a href="sala.php">Salas</a></li>
-                            <li><a href="reserva.php">Reservar Sala</a></li>
-                            <?php echo $objFuncoes->isAdmin() ? '<li><a href="usuario.php">Usuarios</a></li>' : "" ?>
-
-                            <li><a href="logout.php">Logout</a></li>
+                            <li><a href="home.php"> | Reservar </a></li>
+                            <li><a href="sala.php"> | Salas </a></li>
+                            <?php echo $objFuncoes->isAdmin() ? '<li><a href="usuario.php"> | Usuarios </a></li>' : "" ?>
+                            <li><a href="logout.php"> | Logout | </a></li>
                         </ul>
-
                     </div>
-
                 </div>
             </div>
         </nav>
