@@ -17,8 +17,46 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+<<<<<<< HEAD
 CREATE DATABASE `bdreservasalas`;
 USE `bdreservasalas`;
+=======
+
+--
+-- Database: `bdreservasalas`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `cidade`
+--
+
+DROP TABLE IF EXISTS `cidade`;
+CREATE TABLE IF NOT EXISTS `cidade` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(120) DEFAULT NULL,
+  `estado` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Cidade_estado` (`estado`)
+) ENGINE=InnoDB AUTO_INCREMENT=5565 DEFAULT CHARSET=latin1;
+
+
+--
+-- Estrutura da tabela `estado`
+--
+
+DROP TABLE IF EXISTS `estado`;
+CREATE TABLE IF NOT EXISTS `estado` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(75) DEFAULT NULL,
+  `uf` varchar(5) DEFAULT NULL,
+  `pais` int(7) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Estado_pais` (`pais`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+
+>>>>>>> ed330c56ed8e494f0dbee80464ff2813214cbb58
 --
 -- Banco de dados: `bdreservasalas`
 --

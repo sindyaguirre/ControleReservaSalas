@@ -87,10 +87,18 @@ if (isset($_GET['acao'])) {
                     </button>
                     <div class="nav-collapse">
                         <ul class="nav">
+<<<<<<< HEAD
                             <li><a href="home.php"> | Reservar </a></li>
                             <li><a href="sala.php"> | Salas </a></li>
                             <?php echo $objFuncoes->isAdmin() ? '<li><a href="usuario.php"> | Usuarios </a></li>' : "" ?>
                             <li><a href="logout.php"> | Logout | </a></li>
+=======
+                            <li><a href="reserva.php">Reservar</a></li>
+                            <li><a href="sala.php">Salas</a></li>
+                            <?php echo $objFuncoes->isAdmin() ? '<li><a href="usuario.php">Usuarios</a></li>' : "" ?>
+
+                            <li><a href="logout.php">Logout</a></li>
+>>>>>>> ed330c56ed8e494f0dbee80464ff2813214cbb58
                         </ul>
                     </div>
                 </div>
