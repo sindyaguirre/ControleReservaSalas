@@ -35,7 +35,7 @@ if (isset($_GET['acao'])) {
             break;
         case 'delet':
             if ($objUsuario->queryDelete($_GET['func']) == 'ok') {
-                header('location: /gerenciadorTarefas/usuario');
+                header('location: /ControleResevaSalas/usuario.php');
             } else {
                 echo '<script type="text/javascript">alert("Erro em deletar");</script>';
             }

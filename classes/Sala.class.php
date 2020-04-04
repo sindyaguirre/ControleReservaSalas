@@ -45,7 +45,7 @@ class Sala {
     public function querySeleciona($dado) {
         try {
             $this->idsala = $this->objFuncoes->base64($dado, 2);
-            $select = $this->con->conectar()->prepare("SELECT * FROM `salas` WHERE `idsala = :idsala;");
+            $select = $this->con->conectar()->prepare("SELECT * FROM `salas` WHERE `idsala` = :idsala;");
             $select->bindParam(":idsala", $this->idsala, PDO::PARAM_INT);
             $select->execute();
 
@@ -170,9 +170,9 @@ class Sala {
      * 
      * @return type
      */
-    public function querySelectHorario() {
+    public function querySelectHorario($idturno=1) {
         try {
-            $select = $this->con->conectar()->prepare("SELECT * FROM `horarios`;");
+            $select = $this->con->conectar()->prepare("SELECT * FROM `horarios` where idturno = $idturno;");
             $select->execute();
             return $select->fetchAll();
         } catch (Exception $ex) {

@@ -113,6 +113,9 @@ class Funcoes {
                 break;
             case 3: $rst = htmlentities($vlr, ENT_QUOTES, "ISO-8859-1");
                 break;
+            default:
+                $rst=$vlr;
+            break;
         }
         return $rst;
     }

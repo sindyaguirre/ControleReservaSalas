@@ -7,5 +7,5 @@ session_unset(); //limpamos as variaveis globais das sessoes
 
 /*redirecionando para pagina inicial*/
 
-header('location: /ControleReservaSalas/home.php');
+header('location: /ControleReservaSalas/index.php');
 

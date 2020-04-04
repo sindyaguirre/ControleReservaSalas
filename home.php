@@ -104,7 +104,7 @@ if (isset($_POST['btCadastrar'])) {
                 <select name="idturno" id="idturno">
                     <?php foreach ($objSala->querySelectTurno() as $key => $value) {
                         ?>
-                        <option value="<?= $value['idturno'] ?>"><?= $objFuncoes->tratarCaracter($value['turno'], 2) ?></option>
+                        <option value="<?= $value['idturno'] ?>"><?= $objFuncoes->tratarCaracter($value['turno'], 0) ?></option>
                     <?php } ?>
                 </select>
 
@@ -113,7 +113,7 @@ if (isset($_POST['btCadastrar'])) {
                 <select name="idhorario" id="idhorario" disabled="disabled">
                     <?php foreach ($objSala->querySelectHorario() as $key => $value) {
                         ?>
-                        <option value="<?= $value['idhorario'] ?>"><?= $objFuncoes->tratarCaracter($value['horario'], 2) ?></option>
+                        <option value="<?= $value['idhorario'] ?>"><?= $objFuncoes->tratarCaracter($value['horario'], 0) ?></option>
                     <?php } ?>
                 </select>
 

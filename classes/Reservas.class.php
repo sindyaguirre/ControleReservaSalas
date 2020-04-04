@@ -48,7 +48,7 @@ class Reservas {
     public function querySeleciona($dado) {
         try {
             $this->idreserva = $this->objFuncoes->base64($dado, 2);
-            $select = $this->con->conectar()->prepare("SELECT * FROM `reserva` WHERE `idreserva = :idreserva;");
+            $select = $this->con->conectar()->prepare("SELECT * FROM `reserva` WHERE `idreserva` = :idreserva;");
             $select->bindParam(":idreserva", $this->idsala, PDO::PARAM_INT);
             $select->execute();
 
